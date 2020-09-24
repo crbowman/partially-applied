@@ -11,7 +11,7 @@ image:
 ### AVL Trees
 \**Work In Progress*\*
 
-{% highlight clojure %}
+{{< highlight clojure >}}
 (defn height [node]
   "return height of a node, where the height is the number of
    edges from node to a leaf"
@@ -20,9 +20,9 @@ image:
       (node :height)
       0)
     -1))
-{% endhighlight %}
+{{< /highlight >}}
 
-{% highlight clojure %}
+{{< highlight clojure >}}
 (defn balanced? [node]
   (cond
     (not node)
@@ -33,13 +33,13 @@ image:
              1)
          (balanced? (node :left))
          (balanced? (node :right)))))
-{% endhighlight %}
+{{< /highlight >}}
 
-{% highlight clojure %}
+{{< highlight clojure >}}
 (defstruct avl-node :left :val :height :right)
-{% endhighlight %}
+{{< /highlight >}}
 
-{% highlight clojure %}
+{{< highlight clojure >}}
 (defn rotate-with-left-child [k2]
   (let [k1 (k2 :left)]
     (let [k2 (assoc k2 :left (k1 :right))
@@ -49,9 +49,9 @@ image:
             k1 (assoc k1 :height (inc (max (height (k1 :left))
                                            (height k2))))]
         (assoc k1 :right k2)))))
-{% endhighlight %}
+{{< /highlight >}}
 
-{% highlight clojure %}
+{{< highlight clojure >}}
 (defn rotate-with-right-child [k1]
     (let [k2 (k1 :right)]
     (let [k1 (assoc k1 :right (k2 :left))
@@ -61,29 +61,29 @@ image:
             k2 (assoc k2 :height (inc (max (height (k2 :right))
                                            (height k1))))]
         (assoc k2 :left k1)))))
-{% endhighlight %}
+{{< /highlight >}}
 
-{% highlight clojure %}
+{{< highlight clojure >}}
 (defn double-with-left-child [node] nil
   (->> (rotate-with-right-child (node :left))
        (assoc node :left )
        (rotate-with-left-child)))
-{% endhighlight %}
+{{< /highlight >}}
 
-{% highlight clojure %}
+{{< highlight clojure >}}
 (defn double-with-right-child [node] nil
   (->> (rotate-with-left-child (node :right))
        (assoc node :right )
        (rotate-with-right-child)))
-{% endhighlight %}
+{{< /highlight >}}
 
-{% highlight clojure %}
+{{< highlight clojure >}}
 (defn set-height [node]
   (assoc node :height (inc (max (height (node :left))
                                 (height (node :right))))))
-{% endhighlight %}
+{{< /highlight >}}
 
-{% highlight clojure %}
+{{< highlight clojure >}}
 (defn avl-insert
   ([val]
      (struct avl-node nil val 0 nil))
@@ -106,9 +106,9 @@ image:
                (rotate-with-right-child n)
                (double-with-right-child n)))
            (set-height n)))))
-{% endhighlight %}
+{{< /highlight >}}
 
-{% highlight clojure %}
+{{< highlight clojure >}}
 (defn build-avl-tree [xs]
   "Builds a binary tree by iterating through xs, inserting
    each item in the tree"
@@ -118,4 +118,4 @@ image:
       tree
       (let [t (avl-insert (nth xs i) tree)]
         (recur (inc i) t)))))
-{% endhighlight %}
+{{< /highlight >}}
