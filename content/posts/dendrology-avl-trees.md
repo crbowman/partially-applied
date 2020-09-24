@@ -3,7 +3,8 @@ layout: post
 title: AVL Trees In Clojure
 description: "Creating our own AVL tree in Clojure."
 modified: 2015-5-5
-tags: [clojure, algorithms, tree, graph, code, AVL]
+tags: [clojure, algorithms, tree]
+summary: Work In Progress
 image:
   feature: generative-4.jpg
 ---
